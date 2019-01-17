@@ -156,7 +156,7 @@ myTest(hu.advancedweb.example.ListTest) FAILED!
   31|      }
 ```
 
-Notice that even without sophisticated assertions the required information is present in the test report.
+Although Scott plays nicely with other testing tools and frameworks, all information is present in the report even without using sophisticated assertions.
 
 For every failing test, Scott reports the changes and assignments related to
 - local variables,
