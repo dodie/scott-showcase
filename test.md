@@ -156,15 +156,12 @@ myTest(hu.advancedweb.example.ListTest) FAILED!
   31|      }
 ```
 
-Notice that even **without sophisticated** assertions the required information is present in the test report.
+Notice that even without sophisticated assertions the required information is present in the test report.
 
-For every failing test, Scott reports the
-- assignments to **local variables**,
-- **changes** made to objects referenced by local variables and fields,
-- **input parameters** and
-- **relevant fields** that the test accesses, but does not modify.
-
-All information is nicely **visualized on the source code** of the test method.
+For every failing test, Scott reports the changes and assignments related to
+- local variables,
+- input parameters
+- fields that the test accesses
 
 
 Changelog
