@@ -5,8 +5,8 @@
 Scott Test Reporter
 ===================
 
-Scott provides **failure messages containing all state changes** for tests written in Java,
-**without the use of assertion libraries**. All information is **presented on the source code of the test method** as comments:
+Scott provides failure messages containing **all state changes** for tests written in Java,
+so one can get meaningful errors even **without assertion libraries**. All information is **presented on the source code of the test method** as comments:
 
 ```java
 test_1(hu.advancedweb.example.CounterTest)  Time elapsed: 0.005 sec  <<< FAILURE!
