@@ -158,7 +158,7 @@ myTest(hu.advancedweb.example.ListTest) FAILED!
 
 Although Scott plays nicely with other testing tools and frameworks, all information is present in the report even without using sophisticated assertions.
 
-For every failing test, Scott reports the changes and assignments related to
+Besides the usual assertion error, Scott reports the changes and assignments related to
 - local variables
 - input parameters
 - fields that the test accesses
