@@ -5,31 +5,58 @@
 Scott Test Reporter
 ===================
 
-Scott provides failure messages containing **all state changes** for tests written in Java to get meaningful errors even **without assertion libraries**. All information is **presented on the source code of the test method** as comments:
+Scott provides failure messages containing **all state changes** for tests written in Java to get meaningful errors even **without assertion libraries**. All information is **presented on the source code of the test method** as comments.
+
+Consider this failing test case:
 
 ```java
-test_1(hu.advancedweb.example.CounterTest)  Time elapsed: 0.005 sec  <<< FAILURE!
-java.lang.AssertionError: 
+@Test
+public void myTest() {
+	Integer[] myArray = new Integer[] { 1, 4, 2, 4 };
+	List<Integer> myList = Arrays.asList(myArray);
 
-   9|      @Test
-  10|      public void test_1() {
-  11|          Counter counter = new Counter();  // counter=Counter [state=0]
-  12|          
-  13|          counter.increase();  // counter=Counter [state=1]
-  14|          counter.increase();  // counter=Counter [state=2]
-  15|          
-  16|          int state = counter.get();  // state=2
-  17|          
-  18|*         assertEquals(state, 3);  // AssertionError: expected:<2> but was:<3>
-  19|      }
+	Set<Integer> mySet = new HashSet<>(myList);
+	mySet.remove(4);
 
-        at hu.advancedweb.example.CounterTest.test_1(CounterTest.java:18)
+	assertTrue(mySet.contains(4));
+}
 ```
 
+Normally it just produces an assertion error without a meaningful message.
+```
+myTest(hu.advancedweb.example.ListTest)  Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError
+        at hu.advancedweb.example.ListTest.myTest(ListTest.java:25)
+```
 
-It automatically tracks the internal state of the tests to provide important details for a failing scenario,
-favoring simple assertions expressed mostly in plain Java over the extensive use of test libraries,
-such as Hamcrest or AssertJ - although Scott plays nicely with other testing tools and frameworks.
+But **with Scott**, it shows the following message:
+
+```java
+myTest(hu.advancedweb.example.ListTest) Time elapsed: 0.028 sec  <<< FAILURE!
+java.lang.AssertionError: 
+
+  22|      @Test
+  23|      public void myTest() {
+  24|          Integer[] myArray = new Integer[] { 1, 4, 2, 4 };  // myArray=[1, 4, 2, 4]
+  25|          List<Integer> myList = Arrays.asList(myArray);  // myList=[1, 4, 2, 4]
+  26|
+  27|          Set<Integer> mySet = new HashSet<>(myList);  // mySet=[1, 2, 4]
+  28|          mySet.remove(4);  // mySet=[1, 2]
+  29|
+  30|*         assertTrue(mySet.contains(4));  // AssertionError
+  31|      }
+  
+        at hu.advancedweb.example.ListTest.myTest(ListTest.java:25)
+```
+
+Scott automatically tracks the internal state of the tests to provide important details for a failing scenario. 
+
+Although it plays nicely with other testing tools and frameworks, all information is present in the report even without using sophisticated assertions.
+
+Besides the usual assertion error, Scott reports the changes and assignments related to
+- local variables
+- input parameters
+- fields that the test accesses
 
 > **Scott**: All systems automated and ready. A chimpanzee and two trainees could run her.
 
@@ -38,7 +65,7 @@ such as Hamcrest or AssertJ - although Scott plays nicely with other testing too
 Supports [JUnit 4](https://github.com/dodie/scott/tree/master/scott-examples/junit4),
 [JUnit 5](https://github.com/dodie/scott/tree/master/scott-examples/junit5),
 and [Cucumber Java](https://github.com/dodie/scott/tree/master/scott-examples/cucumber-io-cucumber),
-on Java 7, Java 8, and Java 11.
+on Java 7+ (up to Java 11).
 
 
 How to use
@@ -120,48 +147,6 @@ If you can't use the Gradle or Maven Plugin for some reason, you can do the nece
 Configuration
 -------------
 In case you are not satisfied with the default tracking behavior, the Scott Maven Plugin and Gradle Plugin provides [configuration options](https://github.com/dodie/scott/blob/master/docs/configuration.md) to fine-tune its behaviour.
-
-
-Features
---------
-Consider this failing test case:
-
-```java
-@Test
-public void myTest() {
-	Integer[] myArray = new Integer[] { 1, 4, 2, 4 };
-	List<Integer> myList = Arrays.asList(myArray);
-
-	Set<Integer> mySet = new HashSet<>(myList);
-	mySet.remove(4);
-
-	assertTrue(mySet.contains(4));
-}
-```
-
-Normally it just produces an assertion error without a meaningful message.
-But **with Scott**, it shows additional information:
-
-```java
-myTest(hu.advancedweb.example.ListTest) FAILED!
-  22|      @Test
-  23|      public void myTest() {
-  24|          Integer[] myArray = new Integer[] { 1, 4, 2, 4 };  // myArray=[1, 4, 2, 4]
-  25|          List<Integer> myList = Arrays.asList(myArray);  // myList=[1, 4, 2, 4]
-  26|
-  27|          Set<Integer> mySet = new HashSet<>(myList);  // mySet=[1, 2, 4]
-  28|          mySet.remove(4);  // mySet=[1, 2]
-  29|
-  30|*         assertTrue(mySet.contains(4));  // AssertionError
-  31|      }
-```
-
-Although Scott plays nicely with other testing tools and frameworks, all information is present in the report even without using sophisticated assertions.
-
-Besides the usual assertion error, Scott reports the changes and assignments related to
-- local variables
-- input parameters
-- fields that the test accesses
 
 
 Changelog
