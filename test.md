@@ -58,18 +58,18 @@ Besides the usual assertion error, Scott reports the changes and assignments rel
 - input parameters
 - fields that the test accesses
 
-> **Scott**: All systems automated and ready. A chimpanzee and two trainees could run her.
-
-> **Kirk**: Thank you, Mr. Scott. I'll try not to take that personally.
-
 Supports [JUnit 4](https://github.com/dodie/scott/tree/master/scott-examples/junit4),
 [JUnit 5](https://github.com/dodie/scott/tree/master/scott-examples/junit5),
-and [Cucumber Java](https://github.com/dodie/scott/tree/master/scott-examples/cucumber-io-cucumber),
+and [Cucumber Java](https://github.com/dodie/scott/tree/master/scott-examples/cucumber-io-cucumber)
 on Java 7+ (up to Java 11).
 
 
 How to use
 ----------
+
+> **Scott**: All systems automated and ready. A chimpanzee and two trainees could run her.
+
+> **Kirk**: Thank you, Mr. Scott. I'll try not to take that personally.
 
 Just drop it into your project, and Scott will automatically enhance your test reports. You don't have to use its API
 or modify your existing tests to make it work.
