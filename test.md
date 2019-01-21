@@ -67,12 +67,12 @@ on Java 7+ (up to Java 11).
 How to use
 ----------
 
+Just drop it into your project, and Scott will automatically enhance your test reports. You don't have to use its API
+or modify your existing tests to make it work.
+
 > **Scott**: All systems automated and ready. A chimpanzee and two trainees could run her.
 
 > **Kirk**: Thank you, Mr. Scott. I'll try not to take that personally.
-
-Just drop it into your project, and Scott will automatically enhance your test reports. You don't have to use its API
-or modify your existing tests to make it work.
 
 
 ### Gradle
