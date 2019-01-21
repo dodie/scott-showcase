@@ -29,7 +29,7 @@ java.lang.AssertionError
         at hu.advancedweb.example.ListTest.myTest(ListTest.java:25)
 ```
 
-But **with Scott**, it shows the following message:
+But **with Scott**, it shows the following:
 
 ```java
 myTest(hu.advancedweb.example.ListTest) Time elapsed: 0.028 sec  <<< FAILURE!
